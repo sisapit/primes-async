@@ -12,7 +12,7 @@ http.createServer(function handler(req, res) {
         res.writeHead(200, {'Content-Type': 'text/plain'});
         var count = process.fork('count-primes', [max], {silent:true});
         count.stdout.on('data', function(data) {
-            res.end(data.toString().replace(/\n|\r/g, "") + " primes found between 0 and " + max);
+            res.end(data.toString().trim() + " primes found between 0 and " + max);
         });
     }
 }).listen(8080, '127.0.0.1');
